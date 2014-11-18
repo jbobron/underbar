@@ -47,38 +47,20 @@ var _ = {};
   //
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
-<<<<<<< HEAD
 
-    _.each = function(collection, iterator){
-        if(Array.isArray(collection)){
-          for(var i=0; i<collection.length; i++){
-            iterator(collection[i],i, collection);
-          }
-        }
-        else{
-          for(var key in collection){
-            iterator(collection[key], key, collection);
-          }
-        }
-    };
-=======
-  _.each = function(collection, iterator) {
+
+  _.each = function(collection, iterator){
       if(Array.isArray(collection)){
-        for(var i =0; i<collection.length; i++){
-          iterator(collection[i],i,collection);
+        for(var i=0; i<collection.length; i++){
+          iterator(collection[i],i, collection);
         }
       }
       else{
-        //var keys = Object.keys(collection);
-        //console.log(keys);
         for(var key in collection){
-          //console.log(keys);
-          iterator(collection[key], key, collection); 
+          iterator(collection[key], key, collection);
         }
       }
-  
   };
->>>>>>> 31323da2a7870d4051028d0247fbd59ab7d63fdf
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
@@ -113,14 +95,9 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    var result = [];
-      _.each(collection, function(value, key, list){
-        if(!test(value, key, list)){
-          result.push(value);
-        }
-      });
-      return result;
-
+    return _.filter(collection, function(value){
+      return !test(value);
+    });
   };
 
   // Produce a duplicate-free version of the array.
@@ -196,19 +173,6 @@ var _ = {};
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-<<<<<<< HEAD
-
-
-// var reduce = function(collection, iterator, accumulator) {
-//       result = [];
-//     if(accumulator === undefined ){
-//       accumulator=collection[0];
-//     }
-//       each(collection, function(value, key){
-//          accumulator = iterator(accumulator, collection[key]);
-//       });
-//       return accumulator;
-//    };
 
    _.reduce = function(collection, iterator, accumulator) {
       if(accumulator === undefined){
@@ -218,14 +182,7 @@ var _ = {};
          accumulator = iterator(accumulator, collection[key]);
       });
       return accumulator;
-=======
-   _.reduce = function(collection, iterator, accumulator) {
-  //     var total = accumulator;
-  //   _.each(collection, function(value, index, list){
-  //     total+=
-  //   })
->>>>>>> 31323da2a7870d4051028d0247fbd59ab7d63fdf
-   };
+    };
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
@@ -279,28 +236,7 @@ var _ = {};
   //if all false, every will return true everytime, every will be true, some will result to false
   //if all true, every will return false everytime, every will be false, some will return the opposite (!) which is true
     
-    // if(iterator === undefined){
-    //   iterator = _.identity;
-    // }
-    // if(collection.length === 0){
-    //   return false;
-    // }
-    // return _.reduce(collection, function(accumulator, value){
-       
-    //     if(!accumulator && !iterator(value)){
-    //       if(typeof value === "string" && value){
-    //         //console.log()
-    //         return true;
-    //       }
-    //       return false;
-    //     }
-    //     else{
-    //       return true;
-    //     }
-
-
-    // }, false);
-    
+    //
     // TIP: There's a very clever way to re-use every() here.
   
 
