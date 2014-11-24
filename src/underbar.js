@@ -260,13 +260,10 @@ var _ = {};
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
-    var i = 1;
-    var source, prop;
-    
     for (var i = 1, length = arguments.length; i < length; i++) {
-      source = arguments[i];
-      for (prop in source) {
-          if (hasOwnProperty.call(source, prop)) {
+      var source = arguments[i];
+      for (var prop in source) {
+          if (source.hasOwnProperty(prop)) {
               obj[prop] = source[prop];
           }
         }
@@ -278,13 +275,10 @@ var _ = {};
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
-    var i = 1;
-    var source, prop;
-    
-    for (var i = 1, length = arguments.length; i < length; i++) {
-      source = arguments[i];
-      for (prop in source) {
-          if (obj[prop] === void 0) {
+    for(var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var prop in source) {
+          if (!obj.hasOwnProperty(prop)) {
             obj[prop] = source[prop];
           }
           
@@ -336,14 +330,13 @@ var _ = {};
       return function(n){
         if(answer.hasOwnProperty(n)){
           return answer[n];
-        }
-        else{
+        }else{
           answer[n] = func(n);
           return answer[n];
         }
       }
   };
-
+ 
   //make an object for each function, with the key as the input and the value as the output
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -385,8 +378,7 @@ var _ = {};
       }
     }
     return answer;   
-   
-
+  
   };
 
 
@@ -409,6 +401,7 @@ var _ = {};
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
@@ -439,6 +432,31 @@ var _ = {};
   //
   // See the Underbar readme for details.
   _.throttle = function(func, wait) {
+    var alreadyCalledOnce = false;
+    var alreadyCalled = false;
+    // var reset = function(){
+    //     alreadyCalledOnce = false;
+    //   }
+   
+      return function(){
+        if(!alreadyCalledOnce){
+          alreadyCalledOnce = true;
+          // setTimeout(reset, wait);
+          return func();
+        }else{
+          alreadyCalledOnce = true
+          return setTimeout(func, wait);
+        } 
+      }
+      
+    
   };
+
+
+
+
+
+
+
 
 }).call(this);
